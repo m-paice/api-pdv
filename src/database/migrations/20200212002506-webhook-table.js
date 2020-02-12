@@ -2,7 +2,8 @@ module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('webhooks', {
     id: {
       type: Sequelize.UUID,
-      allowNull: false,
+      defaultValue: Sequelize.UUIDV4,
+      primaryKey: true,
     },
     type: {
       type: Sequelize.STRING,
