@@ -11,9 +11,7 @@ class BaseController {
     try {
       const response = await this.model.findMany(query);
 
-      return res.json({
-        data: response,
-      });
+      return res.json(response);
     } catch (error) {
       return res.status(500).json({
         message: error.toString(),
@@ -26,9 +24,7 @@ class BaseController {
     try {
       const response = await this.model.findById(id);
 
-      return res.json({
-        data: response,
-      });
+      return res.json(response);
     } catch (error) {
       return res.status(500).json({
         message: error.toString(),
@@ -40,9 +36,7 @@ class BaseController {
     try {
       const response = await this.model.create(req.body);
 
-      return res.json({
-        data: response,
-      });
+      return res.json(response);
     } catch (error) {
       return res.status(500).json({
         message: error.toString(),
@@ -56,9 +50,7 @@ class BaseController {
     try {
       const response = await this.model.updateById(id, body);
 
-      return res.json({
-        data: response,
-      });
+      return res.json(response);
     } catch (error) {
       return res.status(500).json({
         message: error.toString(),
@@ -69,11 +61,9 @@ class BaseController {
   async destroy(req, res) {
     const { id } = req.params;
     try {
-      const response = await this.model.destroyById(id);
+      await this.model.destroyById(id);
 
-      return res.json({
-        data: response,
-      });
+      return res.sendStatus(200);
     } catch (error) {
       return res.status(500).json({
         message: error.toString(),
