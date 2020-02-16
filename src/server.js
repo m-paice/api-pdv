@@ -8,6 +8,7 @@ const routes = require('./routes');
 const { PORT } = process.env;
 const app = express();
 
+app.use('/files', express.static('upload', { maxAge: '120 days' }));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 

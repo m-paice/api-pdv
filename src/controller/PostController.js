@@ -1,10 +1,10 @@
 const BaseController = require('./BaseController');
 
-const PostResource = require('../resource/PostResource');
+const postResource = require('../resource/PostResource');
 
 class PostController extends BaseController {
   constructor() {
-    super(PostResource, 'posts');
+    super(postResource, 'posts');
   }
 
   routes() {

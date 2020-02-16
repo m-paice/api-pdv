@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   Posts.associate = (models) => {
     Posts.belongsTo(models.authors, { foreignKey: 'authorId', as: 'author' });
     Posts.hasMany(models.comments, { foreignKey: 'postId', as: 'comment' });
+    Posts.hasMany(models.files, { foreignKey: 'postId', as: 'file' });
   };
 
   return Posts;

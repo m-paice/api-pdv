@@ -1,10 +1,10 @@
 const BaseController = require('./BaseController');
 
-const CommentResource = require('../resource/CommentResource');
+const commentResource = require('../resource/CommentResource');
 
 class CommentController extends BaseController {
   constructor() {
-    super(CommentResource, 'comments');
+    super(commentResource, 'comments');
   }
 
   routes() {
