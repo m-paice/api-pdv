@@ -10,6 +10,7 @@ const app = express();
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
-app.use(routes);
+
+routes.forEach((route) => app.use(route));
 
 app.listen(PORT, () => console.log(`server online in port ${PORT}`));

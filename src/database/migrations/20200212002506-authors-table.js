@@ -1,19 +1,20 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('webhooks', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('authors', {
     id: {
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
     },
-    type: {
+    name: {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    driverId: {
+    bio: Sequelize.STRING,
+    username: {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    webhookUrl: {
+    password: {
       type: Sequelize.STRING,
       allowNull: false,
     },
@@ -27,5 +28,5 @@ module.exports = {
     },
   }),
 
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('webhooks'),
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('authors'),
 };
