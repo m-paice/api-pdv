@@ -1,5 +1,7 @@
 const { Router } = require('express');
 
+const auth = require('../middleware/auth');
+
 class BaseController {
   constructor(model, path) {
     this.model = model;
@@ -74,7 +76,7 @@ class BaseController {
   routes() {
     const routes = Router();
 
-    routes.get(`/${this.path}`, this.index.bind(this));
+    routes.get(`/${this.path}`, auth, this.index.bind(this));
     routes.get(`/${this.path}/:id`, this.show.bind(this));
     routes.post(`/${this.path}`, this.store.bind(this));
     routes.put(`/${this.path}/:id`, this.update.bind(this));
