@@ -3,9 +3,13 @@ const BaseController = require('./BaseController');
 
 const authorResource = require('../resource/AuthorResource');
 
+const auth = require('../middleware/auth');
+
 class AuthorController extends BaseController {
   constructor() {
     super(authorResource, 'authors');
+
+    this.authorResource = authorResource;
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -38,10 +42,24 @@ class AuthorController extends BaseController {
     }
   }
 
+  async me(req, res) {
+    const { userId } = req;
+    try {
+      const response = await this.authorResource.findById(userId);
+
+      return res.json(response);
+    } catch (error) {
+      return res.status(500).json({
+        message: error.toString(),
+      });
+    }
+  }
+
   routes() {
     const routes = super.routes();
 
     routes.post('/auth', this.login.bind(this));
+    routes.post('/me', auth, this.me.bind(this));
 
     return routes;
   }
