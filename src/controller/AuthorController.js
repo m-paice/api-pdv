@@ -59,7 +59,7 @@ class AuthorController extends BaseController {
     const routes = super.routes();
 
     routes.post('/auth', this.login.bind(this));
-    routes.post('/me', auth, this.me.bind(this));
+    routes.get('/me', auth, this.me.bind(this));
 
     return routes;
   }
