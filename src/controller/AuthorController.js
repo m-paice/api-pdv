@@ -44,8 +44,9 @@ class AuthorController extends BaseController {
 
   async me(req, res) {
     const { userId } = req;
+    const { query } = req;
     try {
-      const response = await this.authorResource.findById(userId);
+      const response = await this.authorResource.findById(userId, query);
 
       return res.json(response);
     } catch (error) {
