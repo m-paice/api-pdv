@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   Authors.associate = (models) => {
     Authors.hasMany(models.posts, { foreignKey: 'authorId', as: 'post' });
     Authors.hasMany(models.comments, { foreignKey: 'authorId', as: 'comment' });
-    Authors.belongsTo(models.files, { foreignKey: 'authorId', as: 'file' });
+    Authors.hasOne(models.files, { foreignKey: 'authorId', as: 'file' });
   };
 
   return Authors;
