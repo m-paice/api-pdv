@@ -19,8 +19,10 @@ class BaseRepository {
     return this.model.create(data, options);
   }
 
-  updateById(id, data, options) {
-    return this.model.update({ where: { id }, options }, data);
+  async updateById(id, data, options) {
+    await this.model.update(data, { where: { id } });
+
+    return this.model.findByPk(id, options);
   }
 
   destroyById(id) {

@@ -50,9 +50,9 @@ class BaseController {
 
   async update(req, res) {
     const { id } = req.params;
-    const { body } = req;
+    const { body, query } = req;
     try {
-      const response = await this.model.updateById(id, body);
+      const response = await this.model.updateById(id, body, query);
 
       return res.json(response);
     } catch (error) {
@@ -78,7 +78,7 @@ class BaseController {
   routes() {
     const routes = Router();
 
-    routes.get(`/${this.path}`, auth, this.index.bind(this));
+    routes.get(`/${this.path}`, this.index.bind(this));
     routes.get(`/${this.path}/:id`, this.show.bind(this));
     routes.post(`/${this.path}`, this.store.bind(this));
     routes.put(`/${this.path}/:id`, this.update.bind(this));
