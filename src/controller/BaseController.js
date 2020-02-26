@@ -23,8 +23,10 @@ class BaseController {
 
   async show(req, res) {
     const { id } = req.params;
+    const { query } = req;
+
     try {
-      const response = await this.model.findById(id);
+      const response = await this.model.findById(id, query);
 
       return res.json(response);
     } catch (error) {
