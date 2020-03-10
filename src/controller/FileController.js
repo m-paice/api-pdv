@@ -73,7 +73,7 @@ class FileController extends BaseController {
     const routes = super.routes();
 
     routes.post('/file', multer(configMulter).single('file'), this.createFile.bind(this));
-    routes.put('/file/:id', multer(configMulter).single('file'), this.updateFile.bind(this));
+    // routes.put('/file/:id', multer(configMulter).single('file'), this.updateFile.bind(this));
 
     return routes;
   }
