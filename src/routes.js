@@ -1,4 +1,6 @@
-const { authorController, postController, commentController, fileController } = require('./controller');
+const {
+  authorController, postController, commentController, fileController,
+} = require('./controller');
 
 const routes = [
   authorController.routes(),

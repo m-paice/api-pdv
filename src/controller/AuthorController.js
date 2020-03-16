@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const passport = require('../middleware/google');
+const passportGoogle = require('../middleware/google');
+const passportGithub = require('../middleware/github');
 const BaseController = require('./BaseController');
 
 const authorResource = require('../resource/AuthorResource');
@@ -67,15 +68,22 @@ class AuthorController extends BaseController {
     routes.post('/auth', this.login.bind(this));
     routes.get('/me', auth, this.me.bind(this));
     // google auth
-    routes.get('/auth/google', passport.authenticate('google', {
+    routes.get('/auth/google', passportGoogle.authenticate('google', {
       scope: [
         'https://www.googleapis.com/auth/userinfo.profile',
         'https://www.googleapis.com/auth/userinfo.email',
       ],
     }));
-    routes.get('/callback-google', passport.authenticate('google', {
+    routes.get('/callback-google', passportGoogle.authenticate('google', {
       failureRedirect: '/error',
     }), (req, res) => res.json({ message: 'OK' }));
+
+    // github auth
+    routes.get('/auth/github',
+      passportGithub.authenticate('github'));
+    routes.get('/callback-github',
+      passportGithub.authenticate('github', { failureRedirect: '/login' }),
+      (req, res) => res.json({ message: 'OK' }));
 
     routes.get('/error', (req, res) => res.send('Error callback'));
 
