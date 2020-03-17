@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const passportGoogle = require('../middleware/google');
 const passportGithub = require('../middleware/github');
+const passportFacebook = require('../middleware/facebook');
 const BaseController = require('./BaseController');
 
 const authorResource = require('../resource/AuthorResource');
@@ -67,6 +68,7 @@ class AuthorController extends BaseController {
 
     routes.post('/auth', this.login.bind(this));
     routes.get('/me', auth, this.me.bind(this));
+
     // google auth
     routes.get('/auth/google', passportGoogle.authenticate('google', {
       scope: [
@@ -84,6 +86,14 @@ class AuthorController extends BaseController {
     routes.get('/callback-github',
       passportGithub.authenticate('github', { failureRedirect: '/login' }),
       (req, res) => res.json({ message: 'OK' }));
+
+    // facebook auth
+    routes.get('/auth/facebook', passportFacebook.authenticate('facebook'));
+
+    routes.get('/callback-facebook',
+      passportFacebook.authenticate('facebook', {
+        failureRedirect: '/error',
+      }), (req, res) => res.json({ message: 'OK' }));
 
     routes.get('/error', (req, res) => res.send('Error callback'));
 
