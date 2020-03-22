@@ -1,5 +1,5 @@
 const {
-  authorController, postController, commentController, fileController,
+  authorController, postController, commentController, fileController, categoryController,
 } = require('./controller');
 
 const routes = [
@@ -7,6 +7,7 @@ const routes = [
   postController.routes(),
   commentController.routes(),
   fileController.routes(),
+  categoryController.routes(),
 ];
 
 module.exports = routes;
