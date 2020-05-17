@@ -1,15 +1,15 @@
+
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('categories', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('products', {
     id: {
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
-      allowNull: false,
     },
-    name: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
+    name: Sequelize.STRING,
+    category: Sequelize.STRING,
+    price: Sequelize.FLOAT,
+    amount: Sequelize.INTEGER,
     createdAt: {
       type: Sequelize.DATE,
       allowNull: false,
@@ -20,5 +20,5 @@ module.exports = {
     },
   }),
 
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('categories'),
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('products'),
 };
