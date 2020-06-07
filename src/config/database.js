@@ -8,6 +8,7 @@ module.exports = {
   dialect: process.env.DB_DIALECT,
   port: process.env.DB_PORT,
   operatorsAliases: false,
+  storage: 'data/pdv.db',
   config: {
     timestamps: true,
   },
